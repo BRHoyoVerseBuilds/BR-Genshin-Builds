@@ -11,7 +11,7 @@
         /* General reset and styles */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: Arial, Helvetica, sans-serif; background-color: #f1f1f1; }
-
+    
         /* Header */
         .header { 
             background-color: #f1f1f1; 
@@ -39,7 +39,7 @@
             background-color: #ddd; 
             border-radius: 5px; 
         }
-
+    
         /* Hero section */
         .hero-image {
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images2.minutemediacdn.com/image/upload/c_crop,w_1918,h_1078,x_0,y_0/c_fill,w_720,ar_16:9,f_auto,q_auto,g_auto/images/voltaxMediaLibrary/mmsport/video_games/01j8srqq8xdbzkrznv6c.jpg");
@@ -61,7 +61,7 @@
             font-size: 18px; /* Reduced for mobile */
             text-align: center; 
         }
-
+    
         /* Filter and button styles */
         .btn-container { 
             text-align: center; 
@@ -83,7 +83,7 @@
         .btn.active { 
             background-color: #666; 
         }
-
+    
         /* Character grid */
         .row {
             display: flex;
@@ -91,8 +91,7 @@
             justify-content: center;
             gap: 10px; /* Space between cards */
         }
-
-        /* Character grid */
+    
         .column {
             width: 10%; /* Responsive width for larger screens */
             background-color: white;
@@ -102,8 +101,9 @@
             overflow: hidden;
             text-align: center;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            display: none; /* Initially hidden */
         }
-
+    
         /* Character card styles */
         .column img { 
             width: 100%; 
@@ -118,38 +118,33 @@
             padding: 5px; 
             color: gray; 
         }
-
-        /* Hide all cards by default */
-        .column {
-            display: none; /* Initially hidden */
-        }
-
+    
         /* Show cards with the 'show' class */
         .column.show {
-            display: block; /* Show the card */
+            display: block !important; /* Show the card */
         }
-
+    
         /* Responsive styles */
         @media (max-width: 1024px) {
             .column {
                 width: 30%; /* 3 cards per row */
             }
         }
-
+    
         @media (max-width: 768px) {
             .column {
                 width: 45%; /* 2 cards per row */
             }
         }
-
+    
         @media (max-width: 500px) {
             .column {
                 width: 90%; /* 1 card per row */
             }
         }
-
-
     </style>
+    
+    
 </head>
 
 <body>
@@ -172,9 +167,12 @@
         </div>
     </div>
 
+
+    
     <!-- Filter Buttons -->
     <div class="btn-container" id="myBtnContainer">
         <button class="btn active" onclick="filterSelection('all')"> Show All</button>
+        <button class="btn" onclick="filterSelection('region')"> Regions</button>
         <button class="btn" onclick="filterSelection('anemo')"> Anemo</button>
         <button class="btn" onclick="filterSelection('geo')"> Geo</button>
         <button class="btn" onclick="filterSelection('electro')"> Electro</button>
@@ -184,10 +182,10 @@
         <button class="btn" onclick="filterSelection('cryo')"> Cryo</button>
     </div>
 
-<!-- Character Info Grid Sorted by Release Date -->
+<!-- Character Info Grid Sorted by Name -->
 <div class="row">
     <!-- Mondstadt -->
-    <div class="column anemo">
+    <div class="column region anemo geo electro dendro hydro pyro cryo">
         <a href="https://game8.co/games/Genshin-Impact/archives/462690">
             <img src="https://github.com/BRHoyoVerseBuilds/BR-HoYoVerse-Builds/blob/main/img/genshin/regions/mondstadt.png?raw=true" alt="Jean">
         </a>
@@ -195,51 +193,202 @@
         <p>Anemo Region</p>
     </div>
 
-    <div class="column geo">
-        <a href="https://game8.co/games/Genshin-Impact/archives/312182">
-            <img src="https://img.game8.co/3978392/431804a7ebe817ae391a45fd7cc220f9.png/show" alt="Albedo">
-        </a>
-        <h4>Albedo</h4>
-        <p>5 Star</p>
-        <p>Last Banner: Oct 14 - Nov 1 2022</p>
-    </div>
-    <div class="column hydro">
-        <a href="https://game8.co/games/Genshin-Impact/archives/297517">
-            <img src="https://img.game8.co/3997083/12e39302c396e7d628ad95fb2cfbdf7e.png/show" alt="Barbara">
-        </a>
-        <h4>Barbara</h4>
-        <p>4 Star</p>
-        <p>Last Banner: Standard Banners</p>
-    </div>
-    <div class="column anemo">
-        <a href="https://game8.co/games/Genshin-Impact/archives/297536">
-            <img src="https://img.game8.co/3964480/c59ab6fdae02903d954c28ca00020390.png/show" alt="Jean">
-        </a>
-        <h4>Jean</h4>
-        <p>5 Star</p>
-        <p>Last Banner: Standard Banner</p>
-    </div>
-    <div class="column cryo">
-        <a href="https://game8.co/games/Genshin-Impact/archives/297516">
-            <img src="https://img.game8.co/3995199/36ff02b6da407595b3f4ef0927b18915.png/show" alt="Kaeya">
-        </a>
-        <h4>Kaeya</h4>
-        <p>4 Star</p>
-        <p>Last Banner: All Banners</p>
-    </div>
-    <div class="column geo">
-        <a href="https://game8.co/games/Genshin-Impact/archives/297523">
-            <img src="https://img.game8.co/3995198/734ce8e95e5aace925486488f8581955.png/show" alt="Noelle">
-        </a>
-        <h4>Noelle</h4>
-        <p>4 Star</p>
-        <p>Last Banner: All Banners</p>
-    </div>
+    <!-- Albedo's Character Card -->
+<div class="column geo">
+    <a href="https://game8.co/games/Genshin-Impact/archives/312182">
+        <img src="https://img.game8.co/3978392/431804a7ebe817ae391a45fd7cc220f9.png/show" alt="Albedo">
+    </a>
+    <h4>Albedo</h4>
+    <p>5 Star</p>
+    <p>Last Banner: Oct 14 - Nov 1 2022</p>
+</div>
+
+<!-- Amber's Character Card -->
+<div class="column pyro">
+    <a href="https://game8.co/games/Genshin-Impact/archives/297535">
+        <img src="https://img.game8.co/3997084/46c2613c4889164cd05589242eb254b7.png/show" alt="Amber ">
+    </a>
+    <h4>Amber </h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Barbara's Character Card -->
+<div class="column hydro">
+    <a href="https://game8.co/games/Genshin-Impact/archives/297517">
+        <img src="https://img.game8.co/3997083/12e39302c396e7d628ad95fb2cfbdf7e.png/show" alt="Barbara">
+    </a>
+    <h4>Barbara</h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Bennett's Character Card -->
+<div class="column pyro">
+    <a href="https://game8.co/games/Genshin-Impact/archives/Bennett-Best-Builds">
+        <img src="https://img.game8.co/3908359/39943392e46d69c9fdd2eb35b47fbfbb.png/show" alt="Amber">
+    </a>
+    <h4>Bennett</h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Diluc's Character Card -->
+<div class="column pyro">
+    <a href="https://game8.co/games/Genshin-Impact/archives/297518">
+        <img src="https://img.game8.co/3964481/1460ce8664094db06a8831113555f286.png/show" alt="Diluc">
+    </a>
+    <h4>Diluc</h4>
+    <p>5 Star</p>
+    <p>Last Banner: Standard Banner</p>
+</div>
+
+<!-- Diona's Character Card -->
+<div class="column cryo">
+    <a href="https://game8.co/games/Genshin-Impact/archives/305872">
+        <img src="https://img.game8.co/3993568/da1cc1a9644a53628e59887225cc45f3.png/show" alt="Diona">
+    </a>
+    <h4>Diona</h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Eula's Character Card -->
+<div class="column cryo">
+    <a href="https://game8.co/games/Genshin-Impact/archives/328764">
+        <img src="https://img.game8.co/3979897/cf2c4282f77d7178a63dcb07b4ee8a6e.png/show" alt="Eula">
+    </a>
+    <h4>Eula</h4>
+    <p>5 Star</p>
+    <p>Last Banner: Jul 5 - Jul 25 2023</p>
+</div>
+
+<!-- Fischl's Character Card -->
+<div class="column electro">
+    <a href="https://game8.co/games/Genshin-Impact/archives/297524">
+        <img src="https://img.game8.co/3979899/21682c463ba567c3f34517dfaf5695fa.png/show" alt="Fischl">
+    </a>
+    <h4>Fischl</h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Jean's Character Card -->
+<div class="column anemo">
+    <a href="https://game8.co/games/Genshin-Impact/archives/297536">
+        <img src="https://img.game8.co/3964480/c59ab6fdae02903d954c28ca00020390.png/show" alt="Jean">
+    </a>
+    <h4>Jean</h4>
+    <p>5 Star</p>
+    <p>Last Banner: Standard Banner</p>
+</div>
+
+<!-- Kaeya's Character Card -->
+<div class="column cryo">
+    <a href="https://game8.co/games/Genshin-Impact/archives/297516">
+        <img src="https://img.game8.co/3995199/36ff02b6da407595b3f4ef0927b18915.png/show" alt="Klee">
+    </a>
+    <h4>Kaeya</h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Klee's Character Card -->
+<div class="column pyro">
+    <a href="https://game8.co/games/Genshin-Impact/archives/297521">
+        <img src="https://img.game8.co/3993011/b67d3b4f7e9c923e66d7fef76df94df7.png/show" alt="Jean">
+    </a>
+    <h4>Klee</h4>
+    <p>5 Star</p>
+    <p>Last Banner: Jul 5 - Jul 25 2023</p>
+</div>
+
+<!-- Lisa's Character Card -->
+<div class="column electro">
+    <a href="https://game8.co/games/Genshin-Impact/archives/Lisa-Best-Builds">
+        <img src="https://img.game8.co/3997082/ab518d020f2ee56aae992fd60412480d.png/show" alt="Lisa">
+    </a>
+    <h4>Lisa</h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Mika's Character Card -->
+<div class="column cryo">
+    <a href="https://game8.co/games/Genshin-Impact/archives/390096">
+        <img src="https://img.game8.co/3948051/9e9071d636385b745856cccf2b21f996.png/show" alt="Lisa">
+    </a>
+    <h4>Mika</h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Mona's Character Card -->
+<div class="column hydro">
+    <a href="https://game8.co/games/Genshin-Impact/archives/Mona-Best-Builds">
+        <img src="https://img.game8.co/3925824/f120aede59507254806447df0968aa52.png/show" alt="Mona">
+    </a>
+    <h4>Mona</h4>
+    <p>5 Star</p>
+    <p>Last Banner: Standard Banners</p>
+</div>
+
+<!-- Noelle's Character Card -->
+<div class="column geo">
+    <a href="https://game8.co/games/Genshin-Impact/archives/297523">
+        <img src="https://img.game8.co/3995198/734ce8e95e5aace925486488f8581955.png/show" alt="Noelle">
+    </a>
+    <h4>Noelle</h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Razor's Character Card -->
+<div class="column electro">
+    <a href="https://game8.co/games/Genshin-Impact/archives/297519">
+        <img src="https://img.game8.co/3997085/6ea09c5ae40a29b3fa963353f829827b.png/show" alt="Razor">
+    </a>
+    <h4>Razor</h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Rosaria's Character Card -->
+<div class="column cryo">
+    <a href="https://game8.co/games/Genshin-Impact/archives/314177">
+        <img src="https://img.game8.co/3992670/2579a30a469a7f16080cdc52560e4454.png/show" alt="Rosaria">
+    </a>
+    <h4>Rosaria</h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Sucrose's Character Card -->
+<div class="column anemo">
+    <a href="https://game8.co/games/Genshin-Impact/archives/297525">
+        <img src="https://img.game8.co/3993566/ba1709fc7f56481be6e67a1c94a8dec5.png/show" alt="Sucrose">
+    </a>
+    <h4>Sucrose</h4>
+    <p>4 Star</p>
+    <p>Last Banner: All Banners</p>
+</div>
+
+<!-- Venti's Character Card -->
+<div class="column anemo">
+    <a href="https://game8.co/games/Genshin-Impact/archives/Venti-Best-Builds">
+        <img src="https://img.game8.co/3993010/ebe972a16806e7e636b195a9701d3103.png/show" alt="Venti">
+    </a>
+    <h4>Venti</h4>
+    <p>5 Star</p>
+    <p>Last Banner: Oct 17 2023 - Nov 7 2023</p>
+</div>
+
+
 </div>
     
 <div class="row">
     <!-- Liyue -->
-    <div class="column geo">
+    <div class="column region anemo geo electro dendro hydro pyro cryo">
         <a href="https://game8.co/games/Genshin-Impact/archives/462879">
             <img src="https://github.com/BRHoyoVerseBuilds/BR-HoYoVerse-Builds/blob/main/img/genshin/regions/liyue.png?raw=true" alt="Liyue">
         </a>
@@ -274,7 +423,7 @@
   
 <div class="row">
     <!-- Inazuma -->
-    <div class="column electro">
+    <div class="column region anemo geo electro dendro hydro pyro cryo">
         <a href="https://game8.co/games/Genshin-Impact/archives/462900">
             <img src="https://github.com/BRHoyoVerseBuilds/BR-HoYoVerse-Builds/blob/main/img/genshin/regions/inazuma.png?raw=true" alt="Inazuma">
         </a>
@@ -318,7 +467,7 @@
 
 <div class="row">
     <!-- Sumeru -->
-    <div class="column dendro">
+    <div class="column region anemo geo electro dendro hydro pyro cryo">
         <a href="https://game8.co/games/Genshin-Impact/archives/383872">
             <img src="https://github.com/BRHoyoVerseBuilds/BR-HoYoVerse-Builds/blob/main/img/genshin/regions/sumeru.png?raw=true" alt="Sumeru">
         </a>
@@ -353,7 +502,7 @@
 
 <div class="row">
     <!-- Fontaine -->
-    <div class="column hydro">
+    <div class="column region anemo geo electro dendro hydro pyro cryo">
         <a href="https://game8.co/games/Genshin-Impact/archives/329276">
             <img src="https://github.com/BRHoyoVerseBuilds/BR-HoYoVerse-Builds/blob/main/img/genshin/regions/fontaine.png?raw=true" alt="Fontaine">
         </a>
@@ -380,7 +529,7 @@
 
 <div class="row">
     <!-- Natlan -->
-    <div class="column pyro">
+    <div class="column region region anemo geo electro dendro hydro pyro cryo">
         <a href="https://game8.co/games/Genshin-Impact/archives/462026">
             <img src="https://github.com/BRHoyoVerseBuilds/BR-HoYoVerse-Builds/blob/main/img/genshin/regions/Natlan.png?raw=true" alt="Natlan">
         </a>
