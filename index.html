@@ -142,6 +142,19 @@
                 width: 90%; /* 1 card per row */
             }
         }
+
+                /* Search input */
+                .search-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .search-input {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
     </style>
     
     
@@ -153,6 +166,10 @@
     <div class="header">
         <img src="https://github.com/BRHoyoVerseBuilds/BR-HoYoVerse-Builds/blob/main/img/homepage/header.png?raw=true" alt="BR's HoyoVerse Builds">
         <div class="header-right">
+                <!-- Search Input -->
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search for characters..." onkeyup="searchCharacters()">
+                </div>
             <a href="https://github.com/BRHoyoVerseBuilds/BR-HoYoVerse-Builds/releases/download/Android/br_hoyoverse.apk" class="btn" download>
                 <i class="fa fa-download"></i> Download The Android App!
             </a>            
@@ -167,7 +184,10 @@
         </div>
     </div>
 
-
+    <!-- Search Input -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search for characters..." onkeyup="searchCharacters()">
+    </div>
     
     <!-- Filter Buttons -->
     <div class="btn-container" id="myBtnContainer">
@@ -603,57 +623,50 @@
         </script>
         
 
-      <script>
-        // Function to filter characters based on their element
-        function filterSelection(element) {
-            var cards, i;
-            cards = document.getElementsByClassName("column");
-            if (element === "all") element = "";
-            
-            // Loop through all the character cards and hide those that don't match the filter
-            for (i = 0; i < cards.length; i++) {
-                removeClass(cards[i], "show");
-                if (cards[i].className.indexOf(element) > -1) addClass(cards[i], "show");
+        <script>
+            // Filter Functionality
+            function filterSelection(filter) {
+                var columns = document.getElementsByClassName("column");
+                for (var i = 0; i < columns.length; i++) {
+                    columns[i].classList.remove("show");
+                    if (filter === "all" || columns[i].classList.contains(filter)) {
+                        columns[i].classList.add("show");
+                    }
+                }
+                // Remove active class from all buttons
+                var btns = document.getElementsByClassName("btn");
+                for (var i = 0; i < btns.length; i++) {
+                    btns[i].classList.remove("active");
+                }
+                // Add active class to the current button
+                event.currentTarget.classList.add("active");
             }
-        }
     
-        // Show elements with the selected class
-        function addClass(element, name) {
-            var arr1, arr2;
-            arr1 = element.className.split(" ");
-            arr2 = name.split(" ");
-            for (var i = 0; i < arr2.length; i++) {
-                if (arr1.indexOf(arr2[i]) === -1) { element.className += " " + arr2[i]; }
-            }
-        }
+            // Search Functionality
+            function searchCharacters() {
+                var input, filter, columns, i, h4, txtValue;
+                input = document.getElementById('searchInput');
+                filter = input.value.toLowerCase();
+                columns = document.getElementsByClassName("column");
     
-        // Hide elements without the selected class
-        function removeClass(element, name) {
-            var arr1, arr2;
-            arr1 = element.className.split(" ");
-            arr2 = name.split(" ");
-            for (var i = 0; i < arr2.length; i++) {
-                while (arr1.indexOf(arr2[i]) > -1) {
-                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                for (i = 0; i < columns.length; i++) {
+                    h4 = columns[i].getElementsByTagName("h4")[0];
+                    if (h4) {
+                        txtValue = h4.textContent || h4.innerText;
+                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                            columns[i].classList.add("show");
+                        } else {
+                            columns[i].classList.remove("show");
+                        }
+                    }
                 }
             }
-            element.className = arr1.join(" ");
-        }
     
-        // By default, show all characters when the page loads
-        filterSelection("all");
-    
-        // Add active class to the current button (highlight it)
-        var btnContainer = document.getElementById("myBtnContainer");
-        var btns = btnContainer.getElementsByClassName("btn");
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function () {
-                var current = document.getElementsByClassName("active");
-                current[0].className = current[0].className.replace(" active", "");
-                this.className += " active";
+            // Initialize: Show all characters by default
+            document.addEventListener("DOMContentLoaded", function() {
+                filterSelection('all');
             });
-        }
-    </script>
+        </script>
     
     
 
